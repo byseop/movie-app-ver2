@@ -1,0 +1,25 @@
+.Header {
+    position: absolute;
+    right: 30px;
+    top: 0;
+}
+.gnb ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.gnb ul:after {
+    display: block;
+    clear: both;
+    content: '';
+}
+.gnb ul li {
+    float: left;
+    margin: 0 15px;
+    opacity: .5;
+    line-height: 60px;
+    cursor: pointer;
+}
+.gnb ul li.on {
+    opacity: 1;
+}

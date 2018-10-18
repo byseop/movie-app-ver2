@@ -12,7 +12,6 @@ class Movie extends Component{
     return (
       <div className="Movie__Box" onMouseOver={this.handleMouseEnter}>
         <div className="Poster__Wrap"><img src={posterUrl + this.props.poster} alt={this.props.title} /></div>
-        <div>{this.props.id}</div>       
         <div className="Movie__Info">
           <h4>{this.props.title}</h4>       
           <p><i className="fas fa-star"></i>{this.props.vote_average}</p>    

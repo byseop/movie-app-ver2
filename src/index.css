@@ -1,3 +1,6 @@
+html {
+  height: 100vh;
+}
 body {
   margin: 0;
   padding: 0;
@@ -7,6 +10,7 @@ body {
   background: #121328;
   color: #fff;
   letter-spacing: -0.069em;
+  height: 100vh;
 }
 
 code {
