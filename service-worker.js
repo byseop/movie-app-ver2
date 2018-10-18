@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
 
 importScripts(
-  "/byseop/movie-app-ver2/precache-manifest.196090222fd7366fd21f2d713f7fb1ca.js"
+  "/movie-app-ver2/precache-manifest.4c7764f8760c91cd53d3d3c71c93f27c.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/byseop/movie-app-ver2/index.html", {
+workbox.routing.registerNavigationRoute("/movie-app-ver2/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
