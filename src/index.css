@@ -4,7 +4,9 @@ body {
   font-family: "Roboto", "Noto Sans KR", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #eee;
+  background: #121328;
+  color: #fff;
+  letter-spacing: -0.069em;
 }
 
 code {

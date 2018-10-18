@@ -1,3 +1,95 @@
-.Movie {
-    padding: 20px;
+.Now__Playing {
+    position: absolute;
+    width: 55vw;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+}
+.Now__Playing h3 {
+    font-size: 24px;
+    font-weight: 400;
+}
+.Movie__Wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 2em;
+    grid-row-gap: 3em;
+    height: 70vh;
+    overflow: auto;
+    padding-right: 20px;
+}
+.Movie__Wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+.Movie__Wrapper::-webkit-scrollbar-track {
+    background: #121328;
+}
+.Movie__Wrapper::-webkit-scrollbar-thumb {
+    background-color: #000;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+}
+.Movie__Box {
+    cursor: pointer;
+}
+
+.Poster__Wrap img {
+    box-shadow: 0 8px 38px rgba(0, 0, 0, 0.5), 0 5px 12px rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+
+.Movie__Info {
+    margin-top: 20px;
+}
+.Movie__Info h4 {
+    margin: 0;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+.Movie__Info p {
+    margin: 0;
+    margin-top: 5px;
+}
+.Movie__Info .fa-star {
+    color: #ffffae;
+    margin-right: 5px;
+}
+
+.Detail__View {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+}
+.Movie__Bg {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50vw;
+    height: 100vh;
+    background-size: cover;
+}
+
+.Loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
 }

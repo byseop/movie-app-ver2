@@ -9,6 +9,7 @@ class MovieStore {
   @observable movieList = [];
   @observable isMovieLoded = false;
   @observable sortMethod = '';
+  @observable movieBg = '';
 
   @action _callApi = (sortPram) => {
     let SORT = '';
@@ -36,6 +37,10 @@ class MovieStore {
     console.log(this.movieList);
     this._checkMovieLoad(this.movieList);
   }  
+  
+  @action _changeMovieBg = (theMovieBg) => {
+    this.movieBg = theMovieBg;
+  }
 }
 
 const store = new MovieStore();

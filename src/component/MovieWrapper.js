@@ -20,16 +20,29 @@ class MovieWrapper extends Component {
         poster={movie.poster_path}
         bg={movie.backdrop_path}
         vote_average={movie.vote_average}
+        store={this.props.store}
       />
     })
-    return movies
+    return movies;
   }
   
   render() {
     const store = this.props.store;
+
+    const posterUrl = 'https://image.tmdb.org/t/p/original/'
+    const bgStyle = {
+      background: 'url(' + posterUrl + this.props.store.movieBg + ')',
+    }
+
     return (
       <>
-      <div>{ store.isMovieLoded ? this._renderMovie() : <CircularPropgress /> }</div>
+      <div className="Detail__View">
+        <div className="Movie__Bg" style={bgStyle} />
+      </div>
+      <div className="Now__Playing">
+        <h3>현재 상영중인 영화</h3>
+        <div className="Movie__Wrapper">{ store.isMovieLoded ? this._renderMovie() : <div className="Loading"><CircularPropgress /></div> }</div>
+      </div>
       </>
     );
   }
