@@ -4,6 +4,7 @@ import Movie from './Movie';
 import _ from 'lodash';
 import CircularPropgress from '@material-ui/core/CircularProgress';
 import '../css/Movie.css';
+import bgpng from '../images/bg.png';
 
 @inject('store')
 @observer
@@ -12,29 +13,32 @@ class MovieWrapper extends Component {
     this.props.store._getMovies(0);
   }
 
-  _renderMovie = () => {
-    const movies = this.props.store.movieList.map(movie => {
-      return <Movie 
-        key={movie.id}
-        title={movie.title}
-        poster={movie.poster_path}
-        bg={movie.backdrop_path}
-        vote_average={movie.vote_average}
-        store={this.props.store}
-      />
-    })
-    return movies;
-  }
-  
-  render() {
-    const store = this.props.store;
+ _renderMovie = () => {
+   const movies = this.props.store.movieList.map(movie => {
+     return <Movie 
+       key={movie.id}
+       title={movie.title}
+       poster={movie.poster_path}
+       bg={movie.backdrop_path}
+       vote_average={movie.vote_average}
+       store={this.props.store}
+     />
+   })
+   return movies;
+ }
 
-    const posterUrl = 'https://image.tmdb.org/t/p/original/'
-    const bgStyle = {
-      background: 'url(' + posterUrl + this.props.store.movieBg + ')',
-    }
+ render() {
+   const store = this.props.store;
 
-    return (
+   const posterUrl = 'https://image.tmdb.org/t/p/original'
+   const bgStyle = {
+     backgroundImage: 'url('+bgpng+')' + ',' + 'url(' + posterUrl + this.props.store.movieBg + ')',
+     backgroundSize: 'cover',
+     backgroundPosition: 'center center',
+     opacity: '.5'
+   }
+
+   return (
       <>
       <div className="Detail__View">
         <div className="Movie__Bg" style={bgStyle} />
@@ -44,8 +48,8 @@ class MovieWrapper extends Component {
         <div className="Movie__Wrapper">{ store.isMovieLoded ? this._renderMovie() : <div className="Loading"><CircularPropgress /></div> }</div>
       </div>
       </>
-    );
-  }
+   );
+ }
 }
 
 export default MovieWrapper;

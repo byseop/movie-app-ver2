@@ -36,6 +36,7 @@ class MovieStore {
     this.movieList = movies.results;
     console.log(this.movieList);
     this._checkMovieLoad(this.movieList);
+    this._changeMovieBg(this.movieList[0].backdrop_path)
   }  
   
   @action _changeMovieBg = (theMovieBg) => {
