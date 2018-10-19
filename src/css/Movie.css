@@ -15,7 +15,8 @@
     -o-transition: all 0.5s ease-in-out;
 }
 .Movie__Section.on {
-    right: -60%;
+    opacity: 0;
+    visibility: hidden;
 }
 .Movie__Section h3 {
     font-size: 24px;
@@ -101,11 +102,11 @@
     width: 50vw;
     height: 100vh;
     background-size: cover;
-    transition: all 0.8s ease-in-out;
-    -webkit-transition: all 0.8s ease-in-out;
-    -moz-transition: all 0.8s ease-in-out;
-    -ms-transition: all 0.8s ease-in-out;
-    -o-transition: all 0.8s ease-in-out;
+    transition: transform, width 0.8s ease-in-out;
+    -webkit-transition: transform, width 0.8s ease-in-out;
+    -moz-transition: transform, width 0.8s ease-in-out;
+    -ms-transition: transform, width 0.8s ease-in-out;
+    -o-transition: transform, width 0.8s ease-in-out;
 }
 .Detail__View.on .Movie__Bg {
     width: 70vw;

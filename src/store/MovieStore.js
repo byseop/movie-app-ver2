@@ -6,12 +6,13 @@ import _ from 'lodash';
 configure({ enforceActions: 'observed' });
 
 class MovieStore {
-  @observable movieList = [];
-  @observable isMovieLoded = false;
-  @observable sortMethod = '';
-  @observable sortMethodName = '현재 상영중인 영화';
-  @observable movieBg = '';
-  @observable isMovieSelected = false;
+  @observable movieList = []; // 메인 영화 리스트
+  @observable isMovieLoded = false; // 영화가 로드되었는지 체크
+  @observable sortMethod = ''; // 소트 방법
+  @observable sortMethodName = '현재 상영중인 영화'; // 소트 이름
+  @observable movieBg = ''; // 메인 bg
+  @observable isMovieSelected = false; // 영화가 선택되었는지 체크
+  @observable selectedMovie = []; // 선택된 영화
 
   @action _callApi = (sortPram) => {
     // API 불러오기
@@ -64,10 +65,9 @@ class MovieStore {
     // console.log(this.movieList);
     this._checkMovieLoad(this.movieList);
     this._changeMovieBg(this.movieList[0].backdrop_path);
-
   }
 
-  @action _setMovie = movieData => {
+  @action _setMovie = (movieData) => {
     // 영화리스트 동기화
     this.movieList = movieData
   }
@@ -78,7 +78,27 @@ class MovieStore {
   }
 
   @action _movieSelectToggle = () => {
+    // 영화 선택시 화면전환 토글
     this.isMovieSelected = !this.isMovieSelected;
+  }
+
+  @action _callDetail = id => {
+    // 영화 선택시 디테일정보 호출
+    const DEFAULT_URL = 'https://api.themoviedb.org/3';
+    const API_KEY = '?api_key=dc11dbd0605b4d60cc66ce5e8363e063';
+    const LANGUAGE_KR = '&language=ko-KR';
+    const MOVIE_ID = '/movie/'+id;
+
+    return axios.get(DEFAULT_URL + MOVIE_ID + API_KEY + LANGUAGE_KR)
+      .then (response => response.data)
+      // .then (json => console.log(json))
+      .catch (err => console.log(err))
+  }
+
+  @action _detailMovie = id => {
+    const sMovie = this._callDetail(id);
+    this.selectedMovie = sMovie;
+    console.log(sMovie);
   }
 }
 

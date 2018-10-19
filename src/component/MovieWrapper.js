@@ -17,6 +17,7 @@ class MovieWrapper extends Component {
    const movies = this.props.store.movieList.map(movie => {
      return <Movie 
        key={movie.id}
+       id={movie.id}
        title={movie.title}
        poster={movie.poster_path}
        bg={movie.backdrop_path}
