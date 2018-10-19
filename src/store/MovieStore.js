@@ -10,24 +10,6 @@ class MovieStore {
   @observable isMovieLoded = false;
   @observable sortMethod = '';
   @observable movieBg = '';
-  @observable headerMenu = {
-    0: {
-      isActive: true,
-      text: '현재 상영중인 영화',
-    },
-    1: {
-      isActive: false,
-      text: '최근 인기있는 영화'
-    },
-    2: {
-      isActive: false,
-      text: '가장 점수높은 영화'
-    },
-    3: {
-      isActive: false,
-      text: '최근 개봉 & 개봉 예정 영화'
-    },
-  };
 
   @action _callApi = (sortPram) => {
     let SORT = '';
@@ -51,6 +33,7 @@ class MovieStore {
   }
 
   @action _checkMovieLoad = (movieObj) => {
+    // 영화 로딩 체크
     if ( !_.isEmpty(movieObj) ) return this.isMovieLoded = true;
     else return false;
   }
