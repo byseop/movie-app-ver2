@@ -9,6 +9,7 @@ class MovieStore {
   @observable movieList = [];
   @observable isMovieLoded = false;
   @observable sortMethod = '';
+  @observable sortMethodName = '현재 상영중인 영화';
   @observable movieBg = '';
 
   @action _callApi = (sortPram) => {
@@ -22,10 +23,26 @@ class MovieStore {
     const LANGUAGE_KR = '&language=ko-KR';
 
     // eslint-disable-next-line to the line before.
-    if ( sortPram == '0') SORT = NOW_PLAYING // 소트0 -> 현재상영중
-    else if (sortPram == '1') SORT = TRENDING // 소트1 -> 최근인기있는 영화
-    else if (sortPram == '2') SORT = TOP_RATED // 소트2 -> 고득점 영화
-    else if (sortPram == '3') SORT = UPCOMING // 소트3 -> 업커밍 영화
+    if ( sortPram == '0') {
+      // 소트0 -> 현재상영중
+      SORT = NOW_PLAYING;
+      this.sortMethodName = '현재 상영중인 영화';
+    }
+    else if ( sortPram == '1' ) {
+    // 소트1 -> 최근인기있는 영화
+      SORT = TRENDING;
+      this.sortMethodName = '최근 인기있는 영화'
+    }
+    else if (sortPram == '2') {
+      // 소트2 -> 고득점 영화
+      SORT = TOP_RATED;
+      this.sortMethodName = '최근 평점높은 영화'
+    }
+    else if (sortPram == '3') {
+      // 소트3 -> 업커밍 영화
+      SORT = UPCOMING;
+      this.sortMethodName = '최근 개봉 & 예정 영화'
+    }
     
     return axios.get(DEFAULT_URL + SORT + API_KEY + LANGUAGE_KR)
       .then (response => response.data)

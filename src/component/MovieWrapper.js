@@ -44,7 +44,7 @@ class MovieWrapper extends Component {
         <div className="Movie__Bg" style={bgStyle} />
       </div>
       <div className="Now__Playing">
-        <h3>현재 상영중인 영화</h3>
+        <h3>{store.sortMethodName}</h3>
         <div className="Movie__Wrapper">{ store.isMovieLoded ? this._renderMovie() : <div className="Loading"><CircularPropgress /></div> }</div>
       </div>
       </>

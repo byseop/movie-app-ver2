@@ -79,7 +79,7 @@ class Header extends Component {
                 onClick={this.handleTrending}
               />
               <Tab
-                label="최근 점수높은 영화"
+                label="최근 평점높은 영화"
                 classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
                 onClick={this.handleTopRated}
               />
