@@ -11,6 +11,7 @@ body {
   color: #fff;
   letter-spacing: -0.069em;
   height: 100vh;
+  overflow: hidden;
 }
 
 code {

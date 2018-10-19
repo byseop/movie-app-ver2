@@ -18,6 +18,7 @@ const styles = {
       'Roboto',
       'sans-serif',
     ],
+    opacity: '0.6',
     '&:hover': {
       color: '#fff',
       opacity: '.8',
@@ -32,6 +33,7 @@ const styles = {
   },  
   tabSelected: {},
 }
+
 @inject('store')
 @observer
 class Header extends Component {
@@ -55,13 +57,12 @@ class Header extends Component {
     }
 
     render() {
-      const store = this.props.store;
-
       const { classes } = this.props;
       const { value } = this.state;
+      const store = this.props.store;
 
       return (
-        <header className="Header">
+        <header className={store.isMovieSelected ? 'Header on' : 'Header'}>
           <div className="Header__Inner">
             <Tabs
               value={value}

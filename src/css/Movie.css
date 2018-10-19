@@ -1,4 +1,4 @@
-.Now__Playing {
+.Movie__Section {
     position: absolute;
     width: 55vw;
     right: 20px;
@@ -8,8 +8,16 @@
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     -o-transform: translateY(-50%);
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
 }
-.Now__Playing h3 {
+.Movie__Section.on {
+    right: -60%;
+}
+.Movie__Section h3 {
     font-size: 24px;
     font-weight: 400;
 }
@@ -73,6 +81,18 @@
     -moz-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
+    transition: all 0.8s 0.2s ease-in-out;
+    -webkit-transition: all 0.8s 0.2s ease-in-out;
+    -moz-transition: all 0.8s 0.2s ease-in-out;
+    -ms-transition: all 0.8s 0.2s ease-in-out;
+    -o-transition: all 0.8s 0.2s ease-in-out;
+}
+.Detail__View.on {
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
 }
 .Movie__Bg {
     position: absolute;
@@ -81,6 +101,14 @@
     width: 50vw;
     height: 100vh;
     background-size: cover;
+    transition: all 0.8s ease-in-out;
+    -webkit-transition: all 0.8s ease-in-out;
+    -moz-transition: all 0.8s ease-in-out;
+    -ms-transition: all 0.8s ease-in-out;
+    -o-transition: all 0.8s ease-in-out;
+}
+.Detail__View.on .Movie__Bg {
+    width: 70vw;
 }
 
 .Loading {

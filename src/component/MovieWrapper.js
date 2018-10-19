@@ -40,10 +40,10 @@ class MovieWrapper extends Component {
 
    return (
       <>
-      <div className="Detail__View">
+      <div className={store.isMovieSelected ? 'Detail__View on' : 'Detail__View'}>
         <div className="Movie__Bg" style={bgStyle} />
       </div>
-      <div className="Now__Playing">
+      <div className={store.isMovieSelected ? 'Movie__Section on' : 'Movie__Section'}>
         <h3>{store.sortMethodName}</h3>
         <div className="Movie__Wrapper">{ store.isMovieLoded ? this._renderMovie() : <div className="Loading"><CircularPropgress /></div> }</div>
       </div>

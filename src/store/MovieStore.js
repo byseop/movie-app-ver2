@@ -11,8 +11,10 @@ class MovieStore {
   @observable sortMethod = '';
   @observable sortMethodName = '현재 상영중인 영화';
   @observable movieBg = '';
+  @observable isMovieSelected = false;
 
   @action _callApi = (sortPram) => {
+    // API 불러오기
     let SORT = '';
     const NOW_PLAYING = '/movie/now_playing';
     const TRENDING = '/trending/movie/week'
@@ -49,13 +51,14 @@ class MovieStore {
       .catch(err => console.log(err))
   }
 
-  @action _checkMovieLoad = (movieObj) => {
+  @action _checkMovieLoad = movieObj => {
     // 영화 로딩 체크
     if ( !_.isEmpty(movieObj) ) return this.isMovieLoded = true;
     else return false;
   }
   
   @action _getMovies = async(sortPram) => {
+    // 영화 리스트 불러오기
     const movies = await this._callApi(sortPram);
     this._setMovie(movies.results);
     // console.log(this.movieList);
@@ -65,11 +68,17 @@ class MovieStore {
   }
 
   @action _setMovie = movieData => {
+    // 영화리스트 동기화
     this.movieList = movieData
   }
   
-  @action _changeMovieBg = (theMovieBg) => {
+  @action _changeMovieBg = theMovieBg => {
+    // 메인 BG 영화리스트와 동기화
     this.movieBg = theMovieBg;
+  }
+
+  @action _movieSelectToggle = () => {
+    this.isMovieSelected = !this.isMovieSelected;
   }
 }
 
