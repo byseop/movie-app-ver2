@@ -91,14 +91,17 @@ class MovieStore {
 
     return axios.get(DEFAULT_URL + MOVIE_ID + API_KEY + LANGUAGE_KR)
       .then (response => response.data)
-      // .then (json => console.log(json))
       .catch (err => console.log(err))
   }
 
-  @action _detailMovie = id => {
-    const sMovie = this._callDetail(id);
-    this.selectedMovie = sMovie;
-    console.log(sMovie);
+  @action _getDetailMovie = async(id) => {
+    const sMovie = await this._callDetail(id);
+    this._setDetailInfo(sMovie);
+    // console.log(this.selectedMovie);
+  }
+
+  @action _setDetailInfo = (detailInfo) => {
+    this.selectedMovie = detailInfo;
   }
 }
 

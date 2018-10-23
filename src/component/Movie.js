@@ -13,7 +13,7 @@ class Movie extends Component{
   handleMovieSelect = () => {
     const selectedMovieId = this.props.id
     this.props.store._movieSelectToggle();
-    this.props.store._detailMovie(selectedMovieId);
+    this.props.store._getDetailMovie(selectedMovieId);
   }
 
   render() {
