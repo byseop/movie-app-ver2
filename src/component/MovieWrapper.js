@@ -29,18 +29,16 @@ class MovieWrapper extends Component {
  }
 
   _renderDetail = () => {
-    const detailInfo = this.props.store.selectedMovie && this.props.store.selectedMovie.map(movie => {
-      return <DetailInfo 
-        key={movie.id}
-        title={movie.title}
-        og_title={movie.original_title}
-        poster={movie.poster_path}
-        runtime={movie.runtime}
-        vote_average={movie.vote_average}
-        genre={movie.genres}
-      />
-    })
-    return detailInfo;
+    const detatilInfo = this.props.store.selectedMovie;
+    return <DetailInfo 
+      key={detatilInfo.id}
+      title={detatilInfo.title}
+      og_title={detatilInfo.original_title}
+      poster={detatilInfo.poster_path}
+      runtime={detatilInfo.runtime}
+      vote_average={detatilInfo.vote_average}
+      genre={detatilInfo.genres}
+    />
   }
 
   render() {
