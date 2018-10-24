@@ -55,6 +55,9 @@ class Header extends Component {
     handleChange = (event, value) => {
       this.setState({ value });
     }
+    handleBackHome = () => {
+      this.props.store._movieSelectToggle();
+    }
 
     render() {
       const { classes } = this.props;
@@ -88,6 +91,19 @@ class Header extends Component {
                 label="최근 개봉 &amp; 예정 영화"
                 classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
                 onClick={this.handleUpcoming}
+              />
+            </Tabs>
+          </div>
+          <div className="Back__Home">
+            <Tabs
+              value={value}
+              onChange={this.handleChange}
+              classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
+            >
+              <Tab 
+                label="뒤로 가기"
+                classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+                onClick={this.handleBackHome}
               />
             </Tabs>
           </div>

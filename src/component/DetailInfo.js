@@ -1,22 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const DetailInfo = ({title, og_title, poster, runtime, vote_average, /*genre,*/ key}) => {
+class DetailInfo extends Component {
+
+  _renderGenre = () => {
+    const genres = this.props && this.props.genre && this.props.genre.map(genre => {
+      return (<Genre genre={genre.name} key={genre.id} />);
+    })
+    return genres;
+  }
+
+  render() {
+    const posterUrl = 'https://image.tmdb.org/t/p/original'
+
+    return (
+      <>
+        <div className="Poster__Wrap Detail__Poster">
+          <img src={posterUrl + this.props.poster} alt={this.props.title}/>
+        </div>
+        <div className="Text__Info">
+          <h2>{this.props.title}</h2>
+          <h3>{this.props.og_title}</h3>
+          <p><span className="Vote__Average"><i className="fas fa-star"></i>{this.props.vote_average}</span> <span className="Running__Time">{this.props.runtime}분</span></p>
+          <div className="Genre__Wrapp">{this._renderGenre()}</div>
+          <p className="Tagline">{this.props.tagline}</p>
+          <p class="Summary">{this.props.summary}</p>
+        </div>
+      </>
+    );
+  }
+}
+
+function Genre ({genre}) {
   return (
-    <>
-        <div>{key}</div>
-        <div>{title}</div>
-        <div>{og_title}</div>
-        <div>{poster}</div>
-        <div>{runtime}</div>
-        <div>{vote_average}</div>
-        <div>{title}</div>
-        {/* <MovieGenre genre={genre}/> */}
-    </>
-  );
-};
-
-// function MovieGenre ({genre}) {
-//   return <span className="Movie__Genre">{genre}</span>
-// }
+    <span className="Movie__Genre">{genre}</span>
+  )
+}
 
 export default DetailInfo;

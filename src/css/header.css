@@ -2,13 +2,32 @@
     position: absolute;
     right: 30px;
     top: 0;
+    z-index: 100;
+}
+.Header .Header__Inner {
     transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
 }
-.Header.on {
+.Header .Back__Home {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+.Header.on .Back__Home {
+    visibility: visible;
+    opacity: 1;
+}
+.Header.on .Header__Inner{
     visibility: hidden;
     opacity: 0;
 }
