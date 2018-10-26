@@ -13,8 +13,9 @@ class MovieStore {
   @observable movieBg = ''; // 메인 bg
   @observable isMovieSelected = false; // 영화가 선택되었는지 체크
   @observable selectedMovie = []; // 선택된 영화
-  @observable isRecommend = false;
+  @observable isRecommend = false; // 추천 영화 체크
   @observable recommendedMovie = []; // 추천 영화
+  @observable recommendCount = 3 // 추천영화 갯수
 
   @action _callApi = (sortPram) => {
     // API 불러오기
@@ -136,6 +137,14 @@ class MovieStore {
 
   @action _setBgRestore = () => {
     this._changeMovieBg(this.selectedMovie.backdrop_path);
+  }
+
+  @action _recommendMore = () => {
+    this.recommendCount = this.recommendCount + 6;
+  }
+
+  @action _setRecommendCountRestore = () => {
+    this.recommendCount = 3;
   }
 }
 

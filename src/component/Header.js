@@ -59,6 +59,7 @@ class Header extends Component {
     handleBackHome = () => {
       this.props.store._movieSelectToggle();
       this.props.store._setClearSelectedMovie();
+      this.props.store._setRecommendCountRestore();
     }
 
     render() {

@@ -15,7 +15,8 @@ class Recommend extends Component {
   }
         
     _renderRecommendMovie = () => {
-      const recommendMovie = this.props.store.recommendedMovie.map(movie => {
+      const recommendedSlice = this.props.store.recommendedMovie.slice(0, this.props.store.recommendCount);
+      const recommendMovie = recommendedSlice.map(movie => {
         return <Movie 
           key={movie.id}
           id={movie.id}
@@ -29,13 +30,18 @@ class Recommend extends Component {
       return recommendMovie;
     }
 
+    handleRecommendMore = () => {
+      this.props.store._recommendMore();
+    }
+
     render() {
       return (
         <div className="Recommend">
-          <h3>이 영화와 관련된 영화</h3>
+          <h3>이 영화의 추천 영화</h3>
           <div className="Recommend__Wrap">
             {this.props.store.isMovieSelected ? this._renderRecommendMovie() : null}
           </div>
+          <div className="More" onClick={this.handleRecommendMore}><i className="fas fa-caret-down"></i>더 보기</div>
         </div>
       );
     }
