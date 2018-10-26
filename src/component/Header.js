@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { withStyles } from '@material-ui/core/styles'
+import Input from '@material-ui/core/Input';
+import FormControl from '@material-ui/core/FormControl';
+import { withStyles } from '@material-ui/core/styles';
 import '../css/header.css';
 
 const styles = {
@@ -32,6 +34,19 @@ const styles = {
     }
   },  
   tabSelected: {},
+  cssLabel: {
+    '&$cssFocused': {
+      color: '#fff',
+    },
+  },
+  cssUnderline: {
+    '&:after': {
+      borderBottomColor: '#fff',
+    },
+  },
+  input: {
+    color: '#fff'
+  }
 }
 
 @inject('store')
@@ -70,6 +85,20 @@ class Header extends Component {
       return (
         <header className={store.isMovieSelected ? 'Header on' : 'Header'}>
           <div className="Header__Inner">
+            <FormControl
+              htmlFor="custom-css-input"
+              FormLabelClasses={{
+                root: classes.cssLabel,
+                focused: classes.cssFocused,
+              }}
+            > Custum CSS
+              <Input 
+                id="custom-css-input"
+                classes={{
+                  underline: classes.cssUnderline,
+                }}
+              />
+            </FormControl>
             <Tabs
               value={value}
               onChange={this.handleChange}

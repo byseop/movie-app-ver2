@@ -16,14 +16,16 @@ class MovieStore {
   @observable isRecommend = false; // 추천 영화 체크
   @observable recommendedMovie = []; // 추천 영화
   @observable recommendCount = 3 // 추천영화 갯수
+  @observable searchWord = ''; // 검색어
 
   @action _callApi = (sortPram) => {
     // API 불러오기
     let SORT = '';
     const NOW_PLAYING = '/movie/now_playing';
-    const TRENDING = '/trending/movie/week'
-    const TOP_RATED = '/movie/top_rated'
-    const UPCOMING = '/movie/upcoming'
+    const TRENDING = '/trending/movie/week';
+    const TOP_RATED = '/movie/top_rated';
+    const UPCOMING = '/movie/upcoming';
+    const SEARCH = '/search/movie';
     const DEFAULT_URL = 'https://api.themoviedb.org/3';
     const API_KEY = '?api_key=dc11dbd0605b4d60cc66ce5e8363e063';
     const LANGUAGE_KR = '&language=ko-KR';
@@ -48,6 +50,11 @@ class MovieStore {
       // 소트3 -> 업커밍 영화
       SORT = UPCOMING;
       this.sortMethodName = '최근 개봉 & 예정 영화'
+    }
+    else if (sortPram == '4') {
+      // 소트3 -> 검색
+      SORT = SEARCH;
+      this.sortMethodName = '키워드로 검색한 영화'
     }
     
     return axios.get(DEFAULT_URL + SORT + API_KEY + LANGUAGE_KR)
@@ -104,10 +111,12 @@ class MovieStore {
   }
 
   @action _setDetailInfo = (detailInfo) => {
+    // 디테일정보 도익화
     this.selectedMovie = detailInfo;
   }
 
   @action _callRecommendMovie = id => {
+    // 추천영화 호출
     const DEFAULT_URL = 'https://api.themoviedb.org/3';
     const API_KEY = '?api_key=dc11dbd0605b4d60cc66ce5e8363e063';
     const LANGUAGE_KR = '&language=ko-KR';
@@ -119,35 +128,43 @@ class MovieStore {
   }
 
   @action _getRecommendMovie = async(id) => {
+    // 추천영화 동기화
     const rMovie = await this._callRecommendMovie(id);
     this._setRecommendMovie(rMovie.results);
   }
 
   @action _setRecommendMovie = (recommendations) => {
+    // 추천영화 동기화
     this.recommendedMovie = recommendations;
   }
 
   @action _toggleRecommend = () => {
+    // 추천영화 체크
     this.isRecommend = !this.isRecommend;
   }
 
   @action _setClearSelectedMovie = () => {
+    // 선택된 영화 초기화
     this.selectedMovie = {};
   }
 
   @action _setBgRestore = () => {
+    // 메인BG 초기화
     this._changeMovieBg(this.selectedMovie.backdrop_path);
   }
 
   @action _recommendMore = () => {
+    // 선택된 영화 더 불러오기
     this.recommendCount = this.recommendCount + 6;
   }
 
   @action _setRecommendCountRestore = () => {
+    // 선택된 영화 더 불러오기 카운트 초기화
     this.recommendCount = 3;
   }
 
   @action _backHome = () => {
+    // 뒤로가기
     this.isMovieSelected = false;
   }
 }
