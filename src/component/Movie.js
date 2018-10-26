@@ -11,9 +11,13 @@ class Movie extends Component{
   }
 
   handleMovieSelect = () => {
-    const selectedMovieId = this.props.id
+    const selectedMovieId = this.props.id;
     this.props.store._movieSelectToggle();
     this.props.store._getDetailMovie(selectedMovieId);
+    this.props.store._setRecommendCountRestore();
+
+    var DetailBox = document.querySelector('.Detail__Info');
+    DetailBox.scrollTo(0, 0);
   }
 
   handleBgRestore = () => {

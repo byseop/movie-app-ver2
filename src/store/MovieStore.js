@@ -82,7 +82,7 @@ class MovieStore {
 
   @action _movieSelectToggle = () => {
     // 영화 선택시 화면전환 토글
-    this.isMovieSelected = !this.isMovieSelected;
+    if ( !this.isMovieSelected ) this.isMovieSelected = !this.isMovieSelected;
   }
 
   @action _callDetail = id => {
@@ -145,6 +145,10 @@ class MovieStore {
 
   @action _setRecommendCountRestore = () => {
     this.recommendCount = 3;
+  }
+
+  @action _backHome = () => {
+    this.isMovieSelected = false;
   }
 }
 
