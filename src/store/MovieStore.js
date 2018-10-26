@@ -13,6 +13,8 @@ class MovieStore {
   @observable movieBg = ''; // 메인 bg
   @observable isMovieSelected = false; // 영화가 선택되었는지 체크
   @observable selectedMovie = []; // 선택된 영화
+  @observable isRecommend = false;
+  @observable recommendedMovie = []; // 추천 영화
 
   @action _callApi = (sortPram) => {
     // API 불러오기
@@ -102,6 +104,38 @@ class MovieStore {
 
   @action _setDetailInfo = (detailInfo) => {
     this.selectedMovie = detailInfo;
+  }
+
+  @action _callRecommendMovie = id => {
+    const DEFAULT_URL = 'https://api.themoviedb.org/3';
+    const API_KEY = '?api_key=dc11dbd0605b4d60cc66ce5e8363e063';
+    const LANGUAGE_KR = '&language=ko-KR';
+    const RECOMMEND_MOVIE_ID = '/movie/'+id+'/recommendations';
+
+    return axios.get(DEFAULT_URL + RECOMMEND_MOVIE_ID + API_KEY + LANGUAGE_KR)
+      .then (response => response.data)
+      .catch (err => console.log(err))
+  }
+
+  @action _getRecommendMovie = async(id) => {
+    const rMovie = await this._callRecommendMovie(id);
+    this._setRecommendMovie(rMovie.results);
+  }
+
+  @action _setRecommendMovie = (recommendations) => {
+    this.recommendedMovie = recommendations;
+  }
+
+  @action _toggleRecommend = () => {
+    this.isRecommend = !this.isRecommend;
+  }
+
+  @action _setClearSelectedMovie = () => {
+    this.selectedMovie = {};
+  }
+
+  @action _setBgRestore = () => {
+    this._changeMovieBg(this.selectedMovie.backdrop_path);
   }
 }
 

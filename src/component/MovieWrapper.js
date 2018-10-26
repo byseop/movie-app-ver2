@@ -49,7 +49,7 @@ class MovieWrapper extends Component {
 
     const posterUrl = 'https://image.tmdb.org/t/p/original'
     const bgStyle = {
-      backgroundImage: 'url('+bgpng+')' + ',' + 'url(' + posterUrl + store.movieBg + ')',
+      backgroundImage: 'url('+bgpng+'), url(' + posterUrl + store.movieBg + ')',
       backgroundSize: 'cover',
       backgroundPosition: 'center center',
       opacity: '.5'
@@ -65,7 +65,9 @@ class MovieWrapper extends Component {
       </div>
       <div className={store.isMovieSelected ? 'Movie__Section on' : 'Movie__Section'}>
         <h3>{store.sortMethodName}</h3>
-        <div className="Movie__Wrapper">{ store.isMovieLoded ? this._renderMovie() : <div className="Loading"><CircularPropgress /></div> }</div>
+        <div className="Movie__Wrapper">
+          { store.isMovieLoded ? this._renderMovie() : <div className="Loading"><CircularPropgress /></div> }
+        </div>
       </div>
       </>
     );

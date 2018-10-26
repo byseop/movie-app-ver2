@@ -16,10 +16,14 @@ class Movie extends Component{
     this.props.store._getDetailMovie(selectedMovieId);
   }
 
+  handleBgRestore = () => {
+    this.props.store._setBgRestore();
+  }
+
   render() {
     const posterUrl = 'https://image.tmdb.org/t/p/original';
     return (
-      <div className="Movie__Box" onMouseOver={this.handleMouseEnter} onClick={this.handleMovieSelect}>
+      <div className="Movie__Box" onMouseOver={this.handleMouseEnter} onClick={this.handleMovieSelect} onMouseLeave={this.props.store.isMovieSelected ? this.handleBgRestore : null}>
         <div className="Poster__Wrap"><img src={posterUrl + this.props.poster} alt={this.props.title} /></div>
         <div className="Movie__Info">
           <h4>{this.props.title}</h4>       

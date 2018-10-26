@@ -38,7 +38,8 @@ const styles = {
 @observer
 class Header extends Component {
   state = {
-    value: 0
+    value: 0,
+    value2: 0
   }
     handleNowPlaying = () => {
       this.props.store._getMovies(0);
@@ -57,11 +58,12 @@ class Header extends Component {
     }
     handleBackHome = () => {
       this.props.store._movieSelectToggle();
+      this.props.store._setClearSelectedMovie();
     }
 
     render() {
       const { classes } = this.props;
-      const { value } = this.state;
+      const { value, value2 } = this.state;
       const store = this.props.store;
 
       return (
@@ -96,13 +98,13 @@ class Header extends Component {
           </div>
           <div className="Back__Home">
             <Tabs
-              value={value}
+              value={value2}
               onChange={this.handleChange}
               classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
             >
               <Tab 
                 label="뒤로 가기"
-                classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+                classes={{ root: classes.tabRoot}}
                 onClick={this.handleBackHome}
               />
             </Tabs>
