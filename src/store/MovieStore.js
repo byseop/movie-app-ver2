@@ -17,6 +17,8 @@ class MovieStore {
   @observable recommendedMovie = []; // 추천 영화
   @observable recommendCount = 3 // 추천영화 갯수
   @observable searchWord = ''; // 검색어
+  @observable searchWordFix = '';
+  @observable isSuccessSearch = true;
 
   @action _callApi = (sortPram) => {
     // API 불러오기
@@ -25,6 +27,7 @@ class MovieStore {
     const TRENDING = '/trending/movie/week';
     const TOP_RATED = '/movie/top_rated';
     const UPCOMING = '/movie/upcoming';
+    const searchKeyword = '&query=' + this.searchWordFix;
     const SEARCH = '/search/movie';
     const DEFAULT_URL = 'https://api.themoviedb.org/3';
     const API_KEY = '?api_key=dc11dbd0605b4d60cc66ce5e8363e063';
@@ -52,9 +55,13 @@ class MovieStore {
       this.sortMethodName = '최근 개봉 & 예정 영화'
     }
     else if (sortPram == '4') {
-      // 소트3 -> 검색
+      // 소트4 -> 검색
       SORT = SEARCH;
-      this.sortMethodName = '키워드로 검색한 영화'
+      this.sortMethodName = this.searchWordFix + ' 키워드로 검색한 영화'
+
+      return axios.get(DEFAULT_URL + SORT + API_KEY + LANGUAGE_KR + searchKeyword)
+        .then (response => response.data)
+        .catch(err => console.log(err))
     }
     
     return axios.get(DEFAULT_URL + SORT + API_KEY + LANGUAGE_KR)
@@ -71,10 +78,15 @@ class MovieStore {
   @action _getMovies = async(sortPram) => {
     // 영화 리스트 불러오기
     const movies = await this._callApi(sortPram);
-    this._setMovie(movies.results);
-    // console.log(this.movieList);
-    this._checkMovieLoad(this.movieList);
-    this._changeMovieBg(this.movieList[0].backdrop_path);
+    if ( movies.results.length <= 0) {     
+      this._setSearchFailed();
+    } else {
+      this._setMovie(movies.results);
+      // console.log(this.movieList);
+      this._setSearchSuccess();
+      this._checkMovieLoad(this.movieList);
+      this._changeMovieBg(this.movieList[0].backdrop_path);
+    }
   }
 
   @action _setMovie = (movieData) => {
@@ -166,6 +178,22 @@ class MovieStore {
   @action _backHome = () => {
     // 뒤로가기
     this.isMovieSelected = false;
+  }
+
+  @action _setSearchKeyword = (keyword) => {
+    this.searchWord = keyword;
+  }
+
+  @action _setSearchFailed = () => {
+    this.movieList = [];
+    this.isSuccessSearch = false;
+  }
+  @action _setSearchSuccess = () => {
+    this.isSuccessSearch = true;
+  }
+
+  @action _setKeywordFix = () => {
+    this.searchWordFix = this.searchWord;
   }
 }
 

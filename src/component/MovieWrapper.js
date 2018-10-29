@@ -67,6 +67,7 @@ class MovieWrapper extends Component {
         <h3>{store.sortMethodName}</h3>
         <div className="Movie__Wrapper">
           { store.isMovieLoded ? this._renderMovie() : <div className="Loading"><CircularPropgress /></div> }
+          { store.isSuccessSearch ? null : <div className="Search__Failed"><strong>{store.searchWordFix}</strong> 로 검색한 결과가 없습니다.</div>}
         </div>
       </div>
       </>

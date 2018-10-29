@@ -138,6 +138,7 @@
     overflow: auto;
     /* direction: rtl; */
     padding-left: 130px;
+    scroll-behavior: smooth;
 }
 .Detail__Info::-webkit-scrollbar {
     width: 8px;
@@ -205,6 +206,21 @@
 .fa-caret-down {
     font-size: 20px;
     margin-right: 5px;
+}
+
+.Search__Failed {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+.Search__Failed strong {
+    color: #ffffae;
 }
 
 @media screen and (max-width: 1440px) {

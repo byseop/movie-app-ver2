@@ -51,3 +51,46 @@
 .gnb ul li.on {
     opacity: 1;
 }
+
+
+.Search__Wrap {
+    margin-right: 50px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.Search__Wrap input {
+    height: 38px;
+    line-height: 38px;
+    border: none;
+    background: transparent;
+    color: #ccc;
+    font-size: 16px;
+    padding: 0 10px;
+    text-align: center;
+    margin: 5px 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 150px;
+    outline: none;
+    transition: background 0.5s ease-in-out;
+    -webkit-transition: background 0.5s ease-in-out;
+    -moz-transition: background 0.5s ease-in-out;
+    -ms-transition: background 0.5s ease-in-out;
+    -o-transition: background 0.5s ease-in-out;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.Search__Wrap input:focus {
+    background: rgba(0, 0, 0, 0.3);
+}
+.fa-search {
+    font-size: 18px;
+    color: #ccc;
+    cursor: pointer;
+}
+.MuiTabs-root-5 {
+    display: inline-block;
+    vertical-align: middle;
+}

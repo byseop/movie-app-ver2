@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Input from '@material-ui/core/Input';
-import FormControl from '@material-ui/core/FormControl';
 import { withStyles } from '@material-ui/core/styles';
 import '../css/header.css';
 
@@ -34,19 +32,6 @@ const styles = {
     }
   },  
   tabSelected: {},
-  cssLabel: {
-    '&$cssFocused': {
-      color: '#fff',
-    },
-  },
-  cssUnderline: {
-    '&:after': {
-      borderBottomColor: '#fff',
-    },
-  },
-  input: {
-    color: '#fff'
-  }
 }
 
 @inject('store')
@@ -54,7 +39,7 @@ const styles = {
 class Header extends Component {
   state = {
     value: 0,
-    value2: 0
+    value2: 0,
   }
     handleNowPlaying = () => {
       this.props.store._getMovies(0);
@@ -76,6 +61,18 @@ class Header extends Component {
       this.props.store._setClearSelectedMovie();
       this.props.store._setRecommendCountRestore();
     }
+    handleKeywordChange = (e) => {
+      this.props.store._setSearchKeyword(e.target.value);
+    }
+    handleSearch = () => {
+      this.props.store._setKeywordFix();
+      this.props.store._getMovies(4);
+    }
+    handleKeypress = (e) => {
+      if (e.key === 'Enter') {
+        this.handleSearch();
+      }
+    }
 
     render() {
       const { classes } = this.props;
@@ -85,20 +82,17 @@ class Header extends Component {
       return (
         <header className={store.isMovieSelected ? 'Header on' : 'Header'}>
           <div className="Header__Inner">
-            <FormControl
-              htmlFor="custom-css-input"
-              FormLabelClasses={{
-                root: classes.cssLabel,
-                focused: classes.cssFocused,
-              }}
-            > Custum CSS
-              <Input 
-                id="custom-css-input"
-                classes={{
-                  underline: classes.cssUnderline,
-                }}
+            <div className="Search__Wrap">
+              <input 
+                type="text" 
+                placeholder="검색하기"
+                onChange={this.handleKeywordChange}
+                onKeyPress={this.handleKeypress}
               />
-            </FormControl>
+              <i class="fas fa-search"
+                onClick={this.handleSearch}
+              ></i>
+            </div>
             <Tabs
               value={value}
               onChange={this.handleChange}
