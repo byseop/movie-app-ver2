@@ -89,7 +89,7 @@ class Header extends Component {
                 onChange={this.handleKeywordChange}
                 onKeyPress={this.handleKeypress}
               />
-              <i class="fas fa-search"
+              <i className="fas fa-search"
                 onClick={this.handleSearch}
               ></i>
             </div>

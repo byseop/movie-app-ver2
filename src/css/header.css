@@ -90,7 +90,7 @@
     color: #ccc;
     cursor: pointer;
 }
-.MuiTabs-root-5 {
+.Header .Header__Inner > div {
     display: inline-block;
     vertical-align: middle;
 }
