@@ -67,7 +67,7 @@ class MovieWrapper extends Component {
         </div>
         <div className="Movie__Bg">
           <div className="Bg" style={bgStyle} />
-          { store.isShowTrailer ? <div className="Movie__Trailer"><iframe width='100%' height='100%' src={'https://www.youtube.com/embed/'+ this.props.store.movieTrailerKey } frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe><div className="Close__Trailer" onClick={this.handleCloseTrailer}><i className="fas fa-times"></i></div></div> : null }
+          { store.isShowTrailer ? <div className="Movie__Trailer"><iframe width='100%' height='100%' src={'https://www.youtube.com/embed/'+ this.props.store.movieTrailerKey } frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe><div className="Close__Trailer" onClick={this.handleCloseTrailer} title={this.props.store.selectedMovie.title}><i className="fas fa-times"></i></div></div> : null }
         </div>
       </div>
       <div className={store.isMovieSelected ? 'Movie__Section on' : 'Movie__Section'}>
