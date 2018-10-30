@@ -60,6 +60,7 @@ class Header extends Component {
       this.props.store._backHome();
       this.props.store._setClearSelectedMovie();
       this.props.store._setRecommendCountRestore();
+      this.props.store._setHideTrailer();
     }
     handleKeywordChange = (e) => {
       this.props.store._setSearchKeyword(e.target.value);

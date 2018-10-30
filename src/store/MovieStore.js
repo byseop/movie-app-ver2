@@ -19,6 +19,10 @@ class MovieStore {
   @observable searchWord = ''; // 검색어
   @observable searchWordFix = '';
   @observable isSuccessSearch = true;
+  @observable movieTrailer = []; // 트레일러
+  @observable movieTrailerKey = '';
+  @observable isExisTrailer = false; 
+  @observable isShowTrailer = false;
 
   @action _callApi = (sortPram) => {
     // API 불러오기
@@ -120,10 +124,11 @@ class MovieStore {
     const sMovie = await this._callDetail(id);
     this._setDetailInfo(sMovie);
     // console.log(this.selectedMovie);
+    this._getTrailer(id);
   }
 
   @action _setDetailInfo = (detailInfo) => {
-    // 디테일정보 도익화
+    // 디테일정보 동기화
     this.selectedMovie = detailInfo;
   }
 
@@ -181,19 +186,67 @@ class MovieStore {
   }
 
   @action _setSearchKeyword = (keyword) => {
+    // 키워드받아오기
     this.searchWord = keyword;
   }
 
   @action _setSearchFailed = () => {
+    // 검색 실패
     this.movieList = [];
     this.isSuccessSearch = false;
   }
   @action _setSearchSuccess = () => {
+    // 검색 성공
     this.isSuccessSearch = true;
   }
 
   @action _setKeywordFix = () => {
+    // 받아온 키워드를 검색어로 설정
     this.searchWordFix = this.searchWord;
+  }
+
+  @action _callTrailer = id => {
+    // 트레일러 호출
+    const DEFAULT_URL = 'https://api.themoviedb.org/3';
+    const API_KEY = '?api_key=dc11dbd0605b4d60cc66ce5e8363e063';
+    const LANGUAGE_KR = '&language=ko-KR';
+    const TRAILER_MOVIE_ID = '/movie/'+id+'/videos';
+
+    return axios.get(DEFAULT_URL + TRAILER_MOVIE_ID + API_KEY + LANGUAGE_KR)
+      .then (response => response.data)
+      .catch (err => console.log(err))
+  }
+
+  @action _getTrailer = async(id) => {
+    // 트레일러 동기화
+    const trailer = await this._callTrailer(id);
+    this._setTrailer(trailer.results);
+    if ( this.movieTrailer.length > 0 ) {
+      this._setTrueTrailer();
+      this.movieTrailerKey = this.movieTrailer[0].key;
+    } else {
+      this._setFalseTrailer();
+      this.movieTrailerKey = '';
+    }
+  }
+
+  @action _setTrailer = (trailer) => {
+    // 트레일러 동기화
+    this.movieTrailer = trailer;
+  }
+
+  @action _setTrueTrailer = () => {
+    this.isExisTrailer = true;
+  }
+  @action _setFalseTrailer = () => {
+    this.isExisTrailer = false;
+  }
+
+  @action _setShowTrailer = () => {
+    this.isShowTrailer = true;
+  }
+  @action _setHideTrailer = () => {
+    this.isShowTrailer = false;
   }
 }
 
