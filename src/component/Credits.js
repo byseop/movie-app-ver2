@@ -32,7 +32,7 @@ class Credits extends Component {
           <div className="Credit__List__Wrap">
             <div className="Credit__List">
               <div className="Profile__Photo">
-                <img src={posterUrl + this.props.store.director.path} alt={this.props.store.director.name} />
+                {this.props.store.director.path == null ? <i class="fas fa-user"></i> : <img src={posterUrl + this.props.store.director.path} alt={this.props.store.director.name} />}
               </div>
               <p className="Top">감독</p><p className="Bottom">{this.props.store.director.name}</p>
             </div>
