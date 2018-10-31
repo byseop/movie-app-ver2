@@ -22,6 +22,16 @@
   color: #61dafb;
 }
 
+copyright {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 12px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  letter-spacing: 0;
+  opacity: .2;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

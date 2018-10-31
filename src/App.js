@@ -12,6 +12,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <MovieWrapper />
+        <copyright>copyright byseop@gmail.com</copyright>
       </div>
     );
   }
