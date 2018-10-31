@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Recommend from './Recommend';
+import Credits from './Credits';
 import { observer } from 'mobx-react';
 
 @observer
@@ -36,6 +37,7 @@ class DetailInfo extends Component {
           <p className="Tagline">{this.props.tagline}</p>
           <p className="Summary">{this.props.summary}</p>
         </div>
+        <Credits />
         <Recommend />
       </>
     );

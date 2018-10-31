@@ -15,6 +15,7 @@ class Movie extends Component{
     this.props.store._movieSelectToggle();
     this.props.store._getDetailMovie(selectedMovieId);
     this.props.store._setRecommendCountRestore();
+    this.props.store._setCastCountRestore();
 
     var DetailBox = document.querySelector('.Detail__Info');
     DetailBox.scrollTo(0, 0);

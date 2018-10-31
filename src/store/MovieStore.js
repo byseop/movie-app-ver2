@@ -15,7 +15,7 @@ class MovieStore {
   @observable selectedMovie = []; // 선택된 영화
   @observable isRecommend = false; // 추천 영화 체크
   @observable recommendedMovie = []; // 추천 영화
-  @observable recommendCount = 3 // 추천영화 갯수
+  @observable recommendCount = 3; // 추천영화 갯수
   @observable searchWord = ''; // 검색어
   @observable searchWordFix = '';
   @observable isSuccessSearch = true;
@@ -23,6 +23,10 @@ class MovieStore {
   @observable movieTrailerKey = '';
   @observable isExisTrailer = false; 
   @observable isShowTrailer = false;
+  @observable credits = [];
+  @observable director = '';
+  @observable cast = [];
+  @observable castCount = 3;
 
   @action _callApi = (sortPram) => {
     // API 불러오기
@@ -125,6 +129,7 @@ class MovieStore {
     this._setDetailInfo(sMovie);
     // console.log(this.selectedMovie);
     this._getTrailer(id);
+    this._getCredit(id);
   }
 
   @action _setDetailInfo = (detailInfo) => {
@@ -247,6 +252,48 @@ class MovieStore {
   }
   @action _setHideTrailer = () => {
     this.isShowTrailer = false;
+  }
+
+  @action _getCredit = async(id) => {
+    const credit = await this._callCredit(id);
+    this._setCredits(credit);
+    this._getDirector();
+    this._getCast();
+  }
+
+  @action _callCredit = id => {
+    const DEFAULT_URL = 'https://api.themoviedb.org/3';
+    const API_KEY = '?api_key=dc11dbd0605b4d60cc66ce5e8363e063';
+    const LANGUAGE_KR = '&language=ko-KR';
+    const CREDIT_MOVIE_ID = '/movie/'+id+'/credits';
+
+    return axios.get(DEFAULT_URL + CREDIT_MOVIE_ID + API_KEY + LANGUAGE_KR)
+      .then (response => response.data)
+      .catch (err => console.log(err))
+  }
+
+  @action _setCredits = creditObj => {
+    this.credits = creditObj;
+  }
+
+  @action _getDirector = () => {
+    const director = this.credits.crew.filter(obj => obj.job === 'Director');
+    this.director = {
+      name: director[0].name,
+      path: director[0].profile_path
+    };
+  //   console.log(director[0].name);
+  }
+  @action _getCast = () => {
+    const cast = this.credits.cast.map(obj => obj);
+    this.cast = cast;
+  }
+
+  @action _upCastCount = () => {
+    this.castCount += 8;
+  }
+  @action _setCastCountRestore = () => {
+    this.castCount = 3;
   }
 }
 
